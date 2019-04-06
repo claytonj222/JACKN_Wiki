@@ -22,7 +22,8 @@ from wiki.web.forms import CreateUserForm
 from wiki.web import current_wiki
 from wiki.web import current_users
 from wiki.web.user import protect
-
+from RandomPageRedirect.RandPageRedirect import seedRNG, determineValueForRedirect, determinePageForRedirect
+from datetime import datetime
 
 bp = Blueprint('wiki', __name__)
 
@@ -41,6 +42,16 @@ def home():
 def index():
     pages = current_wiki.index()
     return render_template('index.html', pages=pages)
+
+
+@bp.route('/random/')
+@protect
+def random():
+    pages = current_wiki.index()
+    seedRNG(datetime.now())
+    value = determineValueForRedirect(pages)
+    url = determinePageForRedirect(pages, value)
+    return redirect(url_for('wiki.display', url=url))
 
 
 @bp.route('/<path:url>/')
