@@ -64,3 +64,12 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+/Wiki440/wiki/__pycache__/
+/Wiki440/wiki/web/__pycache__/
+/ActiveUsers/__pycache__/
