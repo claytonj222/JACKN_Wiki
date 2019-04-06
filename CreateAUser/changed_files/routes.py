@@ -158,13 +158,6 @@ def user_index():
 
 @bp.route('/user/create/', methods=['GET', 'POST'])
 def user_create():
-    """
-    This route will render the user creation page template, which consists
-    of a form that the person on the web page can create a Wiki system user with.
-
-    After submission of the form it will be validated and then created in the
-    users.json file by the UserManager
-    """
     form = CreateUserForm()
     if form.validate_on_submit():
         current_users.add_user(form.name.data, form.password.data)
