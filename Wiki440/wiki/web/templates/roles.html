@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Roles{% endblock title %}
+{% block content %}
+    <table class="table">
+		<thead>
+			<tr>
+                <th>Name</th>
+                <th>Roles</th>
+            </tr>
+		</thead>
+        <tbody>
+        {% for name, roles in nameswithroles %}
+            <tr>
+                <td>{{ name }}</td>
+                <td>{% for role in roles %}
+                    {{ role }}
+                {% endfor %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
+
+{% block sidebar %}
+    <ul class="nav nav-tabs nav-stacked">
+	    <li><a href="{{ url_for('wiki.add_role') }}">Add Role</a></li>
+    </ul>
+{% endblock sidebar %}

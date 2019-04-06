@@ -4,14 +4,19 @@
     "authentication_method": "cleartext",
     "password": "1234",
     "authenticated": true,
-    "roles": []
+    "roles": [
+      "admin",
+      "moderator"
+    ]
   },
   "sam": {
     "active": true,
     "authentication_method": "cleartext",
     "password": "1234",
     "authenticated": true,
-    "roles": []
+    "roles": [
+      "moderator"
+    ]
   },
   "alex": {
     "active": true,
