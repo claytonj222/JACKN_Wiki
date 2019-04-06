@@ -70,6 +70,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-/Wiki440/wiki/__pycache__/
-/Wiki440/wiki/web/__pycache__/
-/ActiveUsers/__pycache__/
+Wiki440/wiki/__pycache__/
+Wiki440/wiki/web/__pycache__/
+ActiveUsers/__pycache__/
