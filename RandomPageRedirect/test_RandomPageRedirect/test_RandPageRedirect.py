@@ -28,7 +28,9 @@ class TestRandPageRedirect(unittest.TestCase):
         seedRNG(20)
         value = determineValueForRedirect(self.pages)
         page = determinePageForRedirect(self.pages, value)
+        self.assertEqual(value, 11)
         self.assertEqual(page, "test9")
+
 
 
 if __name__ == '__main__':
