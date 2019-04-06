@@ -55,39 +55,3 @@ class LoginForm(Form):
             return
         if not user.check_password(field.data):
             raise ValidationError('Username and password do not match.')
-
-
-class CreateUserForm(Form):
-    """
-    This class represents the form which is used to create a new user.
-    It consists of three fields:
-
-    name - A TextField which is the users name
-    password - A PasswordField which is the users password
-    confirm_password - A PasswordField which makes the user double check their typed password
-
-    All three fields are required on the form
-    """
-    name = TextField('', [InputRequired()])
-    password = PasswordField('', [InputRequired()])
-    confirm_password = PasswordField('', [InputRequired()])
-
-    def validate_name(form, field):
-        """
-        This function exists to validate the name entered by the user. Since
-        a name is unique, we must make sure the user does not already exist by the same name.
-        """
-        user_exists = current_users.get_user(field.data) is not None
-        if user_exists:
-            raise ValidationError('User already exists, please try a different name.')
-
-    def validate_password(form, field):
-        """
-        This function exists to do two types of validation:
-        - First it checks if the password the user entered is empty and will fail if that is true.
-        - If the password is not empty, this function checks to make sure that it matches the confirm password field
-        """
-        if field.data == '':
-            raise ValidationError('Password cannot be empty!')
-        if field.data != form.confirm_password.data:
-            raise ValidationError('Passwords do not match!')

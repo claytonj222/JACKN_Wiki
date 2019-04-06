@@ -18,11 +18,11 @@ from wiki.web.forms import EditorForm
 from wiki.web.forms import LoginForm
 from wiki.web.forms import SearchForm
 from wiki.web.forms import URLForm
-from wiki.web.forms import CreateUserForm
 from wiki.web import current_wiki
 from wiki.web import current_users
 from wiki.web.user import protect
-
+from RandomPageRedirect.RandPageRedirect import seedRNG, determineValueForRedirect, determinePageForRedirect
+from datetime import datetime
 
 bp = Blueprint('wiki', __name__)
 
@@ -41,6 +41,16 @@ def home():
 def index():
     pages = current_wiki.index()
     return render_template('index.html', pages=pages)
+
+
+@bp.route('/random/')
+@protect
+def random():
+    pages = current_wiki.index()
+    seedRNG(datetime.now())
+    value = determineValueForRedirect(pages)
+    url = determinePageForRedirect(pages, value)
+    return redirect(url_for('wiki.display', url=url))
 
 
 @bp.route('/<path:url>/')
@@ -156,20 +166,9 @@ def user_index():
     pass
 
 
-@bp.route('/user/create/', methods=['GET', 'POST'])
+@bp.route('/user/create/')
 def user_create():
-    """
-    This route will render the user creation page template, which consists
-    of a form that the person on the web page can create a Wiki system user with.
-
-    After submission of the form it will be validated and then created in the
-    users.json file by the UserManager
-    """
-    form = CreateUserForm()
-    if form.validate_on_submit():
-        current_users.add_user(form.name.data, form.password.data)
-        return redirect(url_for('wiki.user_login'))
-    return render_template('user_create.html', form=form)
+    pass
 
 
 @bp.route('/user/<int:user_id>/')
