@@ -22,6 +22,7 @@ from wiki.web.forms import CreateUserForm
 from wiki.web import current_wiki
 from wiki.web import current_users
 from wiki.web.user import protect
+from ActiveUsers.ActiveUsers import findActiveUsers
 from RandomPageRedirect.RandPageRedirect import seedRNG, determineValueForRedirect, determinePageForRedirect
 from datetime import datetime
 
@@ -37,6 +38,13 @@ def home():
         return display('home')
     return render_template('home.html')
 
+@bp.route('/activeusers/')
+@protect
+def active():
+    page = current_wiki.index()
+    users = current_users.read()
+    listofusers = findActiveUsers(users)
+    return render_template('activeusers.html', page=page, userList=listofusers)
 
 @bp.route('/index/')
 @protect

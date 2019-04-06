@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}
+	{{ page.title }}
+{% endblock title %}
+
+{% block content %}
+List of Active Users
+ {% for name in userList %}
+ <li>{{ name }}</li>
+ {% endfor %}
+{% endblock content %}
+
+{% block sidebar %}
+{% if page.tags %}
+<h3>Tags</h3>
+  <ul>
+      {% for tag in page.tags.split(',') %}
+        <li><a href="{{ url_for('wiki.tag', name=tag.strip()) }}">{{ tag|trim }}</a></li>
+      {% endfor %}
+  </ul>
+{% endif %}
+<h3>Actions</h3>
+<ul class="nav nav-tabs nav-stacked">
+	<li><a href="{{ url_for('wiki.edit', url=page.url) }}">Edit</a></li>
+  <li><a href="{{ url_for('wiki.move', url=page.url) }}">Move</a></li>
+  <li><a href="#confirmDelete" data-toggle="modal" class="text-error">Delete</a></li>
+</ul>
+{% endblock sidebar %}
