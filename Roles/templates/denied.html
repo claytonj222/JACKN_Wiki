@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Insufficient Permissions{% endblock title %}
+{% block content %}
+<h4>You do not have the necessary role to access this page</h4>
+{% endblock content %}
+
+{% block sidebar %}
+    <p class="alert alert-danger">If you should have access to this page, contact an admin!</p>
+{% endblock sidebar %}

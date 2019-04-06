@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Add A Role{% endblock title %}
+{% block content %}
+    <form class="form form-inline" method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.name(placeholder='Name') }}
+        {{ form.role(placeholder='New Role') }}
+        <input type="submit" class="btn btn-primary" value="Add Role!">
+    </form>
+{% endblock content %}
+
+{% block sidebar %}
+    <p class="alert alert-info">The admin role will allow a user to delete pages and access this page!</p>
+    <p class="alert alert-info">The moderator role will allow a user to edit and move pages!</p>
+    <p class="alert alert-danger">Make sure the user you are adding a role to exists!</p>
+{% endblock sidebar %}

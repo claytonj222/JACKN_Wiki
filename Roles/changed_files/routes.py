@@ -23,9 +23,6 @@ from wiki.web.forms import CreateUserForm
 from wiki.web import current_wiki
 from wiki.web import current_users
 from wiki.web.user import protect
-from ActiveUsers.ActiveUsers import findActiveUsers
-from RandomPageRedirect.RandPageRedirect import seedRNG, determineValueForRedirect, determinePageForRedirect
-from datetime import datetime
 
 
 bp = Blueprint('wiki', __name__)
@@ -39,13 +36,6 @@ def home():
         return display('home')
     return render_template('home.html')
 
-@bp.route('/activeusers/')
-@protect
-def active():
-    page = current_wiki.index()
-    users = current_users.read()
-    listofusers = findActiveUsers(users)
-    return render_template('activeusers.html', page=page, userList=listofusers)
 
 @bp.route('/index/')
 @protect
@@ -53,14 +43,6 @@ def index():
     pages = current_wiki.index()
     return render_template('index.html', pages=pages)
 
-@bp.route('/random/')
-@protect
-def random():
-    pages = current_wiki.index()
-    seedRNG(datetime.now())
-    value = determineValueForRedirect(pages)
-    url = determinePageForRedirect(pages, value)
-    return redirect(url_for('wiki.display', url=url))
 
 @bp.route('/<path:url>/')
 @protect
@@ -222,7 +204,7 @@ def roles():
 
 
 @bp.route('/add_role/', methods=['GET', 'POST'])
-def add_role():
+def add_roll():
     form = AddRoleForm()
     if form.validate_on_submit():
         current_users.get_user(form.name.data).add_role(form.role.data)
