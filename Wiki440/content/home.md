@@ -31,3 +31,24 @@ tags: interesting
 
 ### Evaluation Rules
 * If above rules are not followed, this will reflect badly on your peer review form
+
+# Meeting/Schedule
+[JACKN Wiki Schedule](/jacknwiki_schedule/)
+
+# Features
+### Alex Owens 
+- API: Creating a User
+- Testing: Unit tests will ensure users can be created correctly, passwords are validated, and ensure that username doesn't already exist in the system.
+### Kevin Ireland 
+- API: Privileges
+- Testing: Unit tests will mock users with different permission flags active
+trying to access different actionable items. Assertions will be made on whether or not access is allowed. 
+### Clayton Johnson 
+- API: Random Page Redirect
+- Testing: Unit tests will seed the random number generator with a fixed value. From a given static list of pages, it will be asserted whether a page redirects to an expected page.
+### Jacob Minneman 
+- API: Metadata in the page footers
+- Testing: 
+### Namhai Vu 
+- API: Active Users
+- Testing: Unit tests will determine whether a user is currently set to active

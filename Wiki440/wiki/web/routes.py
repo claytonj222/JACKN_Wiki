@@ -23,7 +23,7 @@ from wiki.web.forms import CreateUserForm
 from wiki.web import current_wiki
 from wiki.web import current_users
 from wiki.web.user import protect
-from ActiveUsers.ActiveUsers import findActiveUsers
+from ActiveUsersAPI.ActiveUsers import findActiveUsers
 from RandomPageRedirect.RandPageRedirect import seedRNG, determineValueForRedirect, determinePageForRedirect
 from datetime import datetime
 
