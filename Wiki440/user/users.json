@@ -31,5 +31,19 @@
     "authentication_method": "cleartext",
     "authenticated": true,
     "password": "beckman"
+  },
+  "test": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "1234"
+  },
+  "tester": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "testing123"
   }
 }

@@ -1,7 +1,7 @@
 import os
 import unittest
 from RandomPageRedirect.RandPageRedirect import seedRNG, determineValueForRedirect, determinePageForRedirect
-from wiki.web import create_app, current_wiki
+from Wiki440.wiki.web import create_app, current_wiki
 
 
 class TestRandPageRedirect(unittest.TestCase):
