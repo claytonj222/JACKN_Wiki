@@ -14,10 +14,10 @@ class TestUserRoles(unittest.TestCase):
         This function just sets up some global things about the wiki like
         users and pages.
         """
-        app = create_app(os.getcwd())
+        self.app = create_app(os.getcwd())
 
-        app.config['TESTING'] = True
-        with app.test_request_context():
+        self.app.config['TESTING'] = True
+        with self.app.test_request_context():
             self.pages = current_wiki.index()
             self.users = current_users
             self.users.add_user('test', '1234')
@@ -28,41 +28,46 @@ class TestUserRoles(unittest.TestCase):
         assigned when he first gets created, and then will test that
         the add_role method is successfully adding a role to the user
         """
-        self.assertEqual(self.users.get_user('test').get('roles'), [])
-        self.users.get_user('test').add_role('admin')
-        self.assertEqual(self.users.get_user('test').get('roles'), ['admin'])
+        with (self.app.app_context()):
+            self.assertEqual(self.users.get_user('test').get('roles'), [])
+            self.users.get_user('test').add_role('admin')
+            self.assertEqual(self.users.get_user('test').get('roles'), ['admin'])
 
     def test_is_admin_true(self):
         """
         This will add the admin role to our test user and then call
         the is_admin method to make sure that it is returning true
         """
-        self.users.get_user('test').add_role('admin')
-        self.assertTrue(self.users.get_user('test').is_admin())
+        with (self.app.app_context()):
+            self.users.get_user('test').add_role('admin')
+            self.assertTrue(self.users.get_user('test').is_admin())
 
     def test_is_admin_false(self):
         """
         This will make sure our test user has no roles and then call
         the is_admin method to make sure that it is returning false
         """
-        self.users.get_user('test').set('roles', [])
-        self.assertFalse(self.users.get_user('test').is_admin())
+        with (self.app.app_context()):
+            self.users.get_user('test').set('roles', [])
+            self.assertFalse(self.users.get_user('test').is_admin())
 
     def test_is_moderator_true(self):
         """
         This will add the moderator role to our test user and then call
         the is_moderator method to make sure that it is returning true
         """
-        self.users.get_user('test').add_role('moderator')
-        self.assertTrue(self.users.get_user('test').is_moderator())
+        with (self.app.app_context()):
+            self.users.get_user('test').add_role('moderator')
+            self.assertTrue(self.users.get_user('test').is_moderator())
 
     def test_is_moderator_false(self):
         """
         This will make sure our test user has no roles and then call
         the is_moderator method to make sure that it is returning false
         """
-        self.users.get_user('test').set('roles', [])
-        self.assertFalse(self.users.get_user('test').is_moderator())
+        with (self.app.app_context()):
+            self.users.get_user('test').set('roles', [])
+            self.assertFalse(self.users.get_user('test').is_moderator())
 
 
 if __name__ == '__main__':

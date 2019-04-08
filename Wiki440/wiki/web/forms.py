@@ -62,6 +62,20 @@ class AddRoleForm(Form):
     role = TextField('', [InputRequired()])
 
 
+def user_already_exists(name, user_manager):
+    """
+    Helper function to test if user already exists in user_manager
+    """
+    return user_manager.get_user(name) is not None
+
+
+def passwords_match(password, confirmation):
+    """
+    Helper function to test if password strings match
+    """
+    return password == confirmation
+
+
 class CreateUserForm(Form):
     """
     This class represents the form which is used to create a new user.
@@ -82,8 +96,7 @@ class CreateUserForm(Form):
         This function exists to validate the name entered by the user. Since
         a name is unique, we must make sure the user does not already exist by the same name.
         """
-        user_exists = current_users.get_user(field.data) is not None
-        if user_exists:
+        if user_already_exists(field.data, current_users):
             raise ValidationError('User already exists, please try a different name.')
 
     def validate_password(form, field):
@@ -94,5 +107,5 @@ class CreateUserForm(Form):
         """
         if field.data == '':
             raise ValidationError('Password cannot be empty!')
-        if field.data != form.confirm_password.data:
+        if not passwords_match(field.data, form.confirm_password.data):
             raise ValidationError('Passwords do not match!')

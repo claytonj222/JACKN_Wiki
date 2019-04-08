@@ -1,5 +1,5 @@
 import unittest
-from JACKN_Wiki.ActiveUsers.ActiveUsers import findActiveUsers
+from JACKN_Wiki.ActiveUsersAPI.ActiveUsers import findActiveUsers
 
 
 class TestActiveUsers(unittest.TestCase):
